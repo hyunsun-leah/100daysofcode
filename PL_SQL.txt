@@ -1,0 +1,57 @@
+ < PL/SQL >
+    PROCEDURE LANGUAGE EXTENSION TO SQL
+    
+    오라클 자체에 내장되어있는 절차적 언어
+    SQL문장 내에서 변수의 정의, 조건처리(IF), 반복처리(LOOP,FOR,WHILE)등을 지원하여 SQL의 단점을 보완
+    다수의 SQL문을 한번에 실행 가능
+    
+    * PL/SQL 구조
+    - 선언부 (DECLARE SECTION)     : DECLARE로 시작, 변수나 상수를 선언 및 초기화하는 부분
+    - 실행부 (EXECUTABLE SECTION)  : BEGIN으로 시작, 제어문(조건문, 반복문) 등의 로직을 기술하는 부분
+    - 예외처리부 (EXCEPTION SECTION): EXCEPTION으로 시작, 예외발생 시 해결하기 위한 구문으로 기술하는 부분
+    
+    * PL/SQL 장점
+    BLOCK구조로 다수의 SQL문을 한번에 오라클로 보내서 처리하므로 수행속도가 빠름
+
+
+-- 1. DECLARE 선언부
+--    변수 및 상수 선언해 놓는 공간 (초기화도 가능)
+--    일반타입변수, 레퍼런스타입변수, ROW타입변수
+
+-- 1_1) 일반 타입 변수 선언 및 초기화
+--      [표현법] 변수명 [CONSTANT] 자료형(크기) [:= 값];
+
+-- 1_2) 레퍼런스 타입 변수 선언 및 초기화 (어떤테이블의 어떤컬럼의 데이터타입을 참조해서 그 타입으로 지정)
+--      [표현법] 변수명 테이블명.컬럼명%TYPE;
+
+-- 1_3) 한 행에 대한 타입 변수 선언
+--      [표현법] 변수명 테이블명%ROWTYPE;
+
+-- 2. BEGIN
+
+-- ** 조건문 ** 
+
+-- 1) IF 조건식 THEN 실행내용 END IF; (단일 IF문)
+-- 2) IF 조건식 THEN 실행내용 ELSE 실행내용
+-- 3) IF 조건식1 THEN 실행내용1 ELSIF 조건식2 THEN 실행내용2 ELSE 실행내용 END IF; {IF~ELSE IF문)
+-- 4) CASE 비교할대상자 WHEN 동등비교할값1 THEN 결과값1 WHEN 비교값2 THEN 결과값2 ELSE 결과값 END; (SWITCH문)
+
+1.  BASIC LOOP
+    
+    [표현식]
+    LOOP
+        반복적으로 실행시킬 구문
+        
+        반복문을 빠져나갈 조건
+    END LOOP;
+    
+    --> 반복문을 빠져나갈 조건문 (2가지 표현)
+        IF 조건식 THEN EXIT 
+
+2. FOR LOOP
+    
+    [표현식]
+    FOR 변수 IN [REVERSE] 초기값..최종값
+    LOOP
+        반복적으로 실행할 구문;
+    END LOOP;
